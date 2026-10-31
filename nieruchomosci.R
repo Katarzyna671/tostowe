@@ -22,6 +22,32 @@ summary(nier)
 colSums(is.na(nier)) #nie ma braków danych
 anyDuplicated(nier) #brak duplikatów
 
-#zadanie 2
+#zadanie 2 przelicz cenę i sprawdź jej rozkład. 
+Dodaj kolumnę `cena_twd_m2`: `cena_10k_twd_ping * 10000 / 3.3`. Oblicz minimum, medianę, średnią i maksimum ceny za m². Wyświetl pięć nieruchomości o najwyższej cenie jednostkowej wraz z ich wiekiem, odległością od metra i liczbą sklepów.
+Pytanie: czy średnia jest wyższa od mediany? Co to mówi o rozkładzie cen? Nie interpretuj tej ceny jako wartości całego lokalu.
+# mutate(), summarise(), arrange(desc(...)), slice_head(n = 5)
+
+#dodanie kolumny 
+nier<- mutate(nier, cena_twd_m2 = cena_10k_twd_ping* 10000 / 3.3)
+
+#podstawowe statystyki dla kolumny cena_twd_m2
+summary(nier$cena_twd_m2) #Uwaga summary a nie summarise! 
+
+#pięć nieruchomości o najwyższej cenie jednostkowej wraz z ich wiekiem, odległością od metra i liczbą sklepów.
+nier %>%
+  select(cena_twd_m2,wiek_lat,metro_m,sklepy) %>%
+  arrange(-(cena_twd_m2)) %>%
+  head(5)
+
+#czy średnia jest wyższa od mediany? Co to mówi o rozkładzie cen?
+średnia jest niższa od mediany, mamy do czynienia z rozkładen skośnym, asymetrycznym lewostronnie 
+czyli wartości skrajne, niższe ciągną średnią cenę lokalu w dół, mediana jest odporna na te wartości odstające
+
+
+
+  
+
+
+
 
 

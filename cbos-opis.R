@@ -16,8 +16,47 @@ cbos <- cbos_raw %>% transmute(
 dim(cbos)
 head(cbos)
 
-### Zadanie 5 — poznaj respondentów
+### Zadanie 5
 
+library(dplyr)
+
+# Liczba obserwacji i braków
 nrow(cbos)
-sum(is.na(dane$plec))
-sum(is.na(dane$miejscowosc))
+colSums(is.na(cbos))
+
+# Płeć
+cbos %>%
+  filter(!is.na(plec)) %>%
+  count(plec) %>%
+  mutate(procent = round(100 * n / sum(n), 2))
+
+# Miejscowość
+cbos %>%
+  filter(!is.na(miejscowosc)) %>%
+  count(miejscowosc) %>%
+  mutate(procent = round(100 * n / sum(n), 2))
+
+cbos %>%
+  filter(!is.na(miejscowosc)) %>%
+  summarise(
+    mianownik = n(),
+    wies = round(100 * sum(miejscowosc == "Wieś") / n(), 2),
+    miasto_500tys = round(100 * sum(miejscowosc == "500 tys. i więcej") / n(), 2)
+  )
+
+### Zadanie 6
+
+# Liczebności i odsetki odpowiedzi
+cbos %>%
+  filter(!is.na(kierunek)) %>%
+  count(kierunek) %>%
+  mutate(procent = round(100 * n / sum(n), 2))
+
+cbos %>%
+  summarise(
+    mianownik_caly = sum(!is.na(kierunek)),
+    mianownik_dobry_zly = sum(kierunek %in% c("W dobrym", "W złym"), na.rm = TRUE),
+    procent_caly = round(100 * sum(kierunek == "W dobrym", na.rm = TRUE) / mianownik_caly, 2),
+    procent_dobry_zly = round(100 * sum(kierunek == "W dobrym", na.rm = TRUE) / mianownik_dobry_zly, 2)
+  )
+

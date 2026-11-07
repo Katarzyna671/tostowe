@@ -25,6 +25,7 @@ download.file(adres_cbos, plik_cbos, mode = "wb", quiet = TRUE)
 cbos_raw <- read_sav(plik_cbos)
 unlink(plik_cbos)
 
+# Przygotowanie kolumn
 cbos <- cbos_raw %>% transmute(
   plec = as_factor(plec),
   miejscowosc = as_factor(klm6),
@@ -34,6 +35,8 @@ cbos <- cbos_raw %>% transmute(
 )
 dim(cbos)
 head(cbos)
+
+
 
 #Zadanie 7
 cbos %>%
@@ -45,9 +48,15 @@ cbos %>%
 
 #Zadanie 8
 
+cbos %>%
+  filter(kierunek == "W złym") %>% 
+  count(prognoza, sort = TRUE)
 
+#Zadanie 8 - odpowiedź na pytanie: Która odpowiedź była najczęstsza w tej grupie?
+#Najczęstszą odpowiedzią według ramki z konsoli jest "Nie zmieni się". Taką deklarację przyjęło 152 respondentów.
 
-
+#Zadanie 8 - odpowiedź na pytanie: Czy na podstawie tej tabeli można wyciągać wnioski przyczynowe?
+# Nie jest to możliwe, bo wyniki nie udowadniają, że odpowiedzi wynikają bezpośrednio jedna z drugiej. Tabelka jest tylko podsumowaniem głosów. Choć większość głosów przeważa na określenie sytuacji jako "Nie zmieni się", to nie można tego utożsamiać głębiej, by dochodzić do wniosków przyczynowych.
 
 #dodanie
 MacBook-Air-Marcin:Analiza danych w R marcinbielinski$ git add (Marcin)
@@ -72,3 +81,5 @@ remote:
   To https://github.com/Katarzyna671/tostowe.git
 * [new branch]      Marcin -> Marcin
 branch 'Marcin' set up to track 'orygin/Marcin'.
+
+

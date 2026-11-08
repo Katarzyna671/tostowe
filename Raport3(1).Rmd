@@ -237,7 +237,7 @@ dane %>%
 ```{r 20, eval=FALSE}
 dane %>%
   transmute(
-    Release = Release.Date %>% as.Date(format = '%m/%d/%y')
+    Release = Release.Date %>% as.Date(format = '%m/%d/%Y')
     ,Netflix.Release = Netflix.Release.Date %>% as.Date(format = '%m/%d/%y')
   )
 ```
@@ -246,7 +246,8 @@ dane %>%
 **CHALLENGE 1:** Jaki jest najstarszy film Woody'ego Allena dostępny na Netflixie?
 
 ```{r 21, eval=FALSE}
-# miejsce na kod
+ch1 <- source("./zadania/zadanie1.R")
+print(ch1)
 ```
 
 

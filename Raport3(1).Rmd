@@ -238,7 +238,7 @@ dane %>%
 dane %>%
   transmute(
     Release = Release.Date %>% as.Date(format = '%m/%d/%Y')
-    ,Netflix.Release = Netflix.Release.Date %>% as.Date(format = '%m/%d/%y')
+    ,Netflix.Release = Netflix.Release.Date %>% as.Date(format = '%m/%d/%Y')
   )
 ```
 
@@ -417,7 +417,8 @@ print(ch2)
 
 
 ```{r 35, eval=FALSE}
-# miejsce na kod
+ch3 <- source("./zadania/Zadanie3.R")
+print(ch3)
 ```
 
 
